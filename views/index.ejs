@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> FCB </title>
+
+	<script
+	  src="https://code.jquery.com/jquery-3.4.1.min.js"
+	  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+	  crossorigin="anonymous"></script>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">  	
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<script type="text/javascript" src="js/crud-players.js"></script>
+	<script type="text/javascript" src="js/player-form.js"></script>
+	<script type="text/javascript" src="js/show-players.js"></script>
+</head>
+<body>
+	<div class="col-md-4 m-auto text-light b3">
+        <h3> Welcome to FC Barcelona </h3>
+	</div>
+	
+	<div class="container-fluid mt-3">
+		<div class="row">
+			<!-- Add Player Form  -->
+			<form class="col-md-5 h-50" id="add-form">
+				<div class="form-row">
+					<div class="form-group col-md-4">
+						<label for="name">Full Name</label>
+						<input type="text" class="form-control", name="name" placeholder="Player Name" required>
+					</div>
+			
+					<div class="form-group col-md-6">
+						<label for="email">Email</label>
+						<input type="email" class="form-control", name="email" placeholder="Player Email" required>
+					</div>
+				</div>
+						
+				<div class="form-row">
+					<div class="form-group col-md-3">
+						<label for="age">Age</label>
+						<input type="text" class="form-control", name="age" placeholder="Age">
+					</div>
+			
+					<div class="form-group col-md-5">
+						<label for="wages">wages</label>
+						<input type="text" class="form-control", name="wages" placeholder="wages">
+					</div>
+					
+					<div class="form-group col-md-3">
+						<label for="rating">Rating</label>
+						<input type="number" class="form-control", name="rating" placeholder="Rating" max=10>
+					</div>
+		
+					<div class="form-group col-md-5">
+						<label for="rating">Market Value</label>
+						<input type="number" class="form-control", name="price" placeholder="In $">
+					</div>
+		
+					<div class="form-group col-md-5">
+						<label for="rating">Contract Expire</label>
+						<input type="date" class="form-control" pattern="\d{4}/\d{2}/\d{2}" name="contract_till" required>
+					</div>
+				</div>
+				<button type="button"  class="btn btn-success add-btn">
+					Add a Player 
+				</button>
+			</form>
+			<!-- Player Information -->
+			<!-- <h3 class="col-md-5 m-auto"> Player Information </h3> -->
+			<table class="table table-striped table-responsive col-md-6" id=show-table>
+				<thead class="thead-inverse">
+					<tr>
+						<th> Name</th>
+						<th> Email </th>
+						<th> Price </th>
+						<th> Contract Till </th>
+						<th colspan="3"> Action </th>
+					</tr>
+					</thead>
+					<tbody>
+					</tbody>
+			</table>
+
+		</div>
+	</div>
+	
+	<!-- Update Player Form -->
+	<div class="modal fade" id="Player_Update_Modal" tabindex="-1" role="dialog" aria-labelledby="Player_Update_ModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header bg-info">
+			<h5 class="modal-title text-light" id="Player_Update_ModalLabel">Update Player</h5>
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+			</div>
+			<div class="modal-body bg-dark text-light">
+				<form class="m-auto">
+					<div class="form-group">
+						<label for="uname">Full Name</label>
+						<input type="text" class="form-control", name="uname" placeholder="Player Name" disabled>
+					</div>
+			
+					<div class="form-row">
+						<div class="form-group col-md-3">
+							<label for="uage">Age</label>
+							<input type="text" class="form-control", name="uage" placeholder="Age">
+						</div>
+				
+						<div class="form-group col-md-3">
+							<label for="uwages">wages</label>
+							<input type="text" class="form-control", name="uwages" placeholder="wages">
+						</div>
+						
+						<div class="form-group col-md-3">
+							<label for="urating">Rating</label>
+							<input type="number" class="form-control", name="urating" placeholder="Rating">
+						</div>
+			
+						<div class="form-group col-md-5">
+							<label for="uprice">Market Value</label>
+							<input type="number" class="form-control", name="uprice" placeholder="In €">
+						</div>
+			
+						<div class="form-group col-md-5">
+							<label for="ucontract_till">Contract Expire</label>
+							<input type="date" class="form-control" pattern="\d{4}/\d{2}/\d{2}" name="ucontract_till">
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer bg-secondary">
+				<button type="button" class="btn btn-success update-btn"> Update Player </button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+			</div>
+		</div>
+		</div>
+	</div>
+	
+	<!-- View Player Modal -->
+	<div class="modal fade" id="Player_View_Modal" tabindex="-1" role="dialog" aria-labelledby="Player_View_ModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content bg-dark text-light">
+			<div class="modal-body">
+				<form class="m-auto">
+					<div class="form-group">
+						<label for="vname">Full Name</label>
+						<input type="text" class="form-control", name="vname" disabled>
+					</div>
+			
+					<div class="form-row">
+						<div class="form-group col-md-4">
+							<label for="vage">Age</label>
+							<input type="text" class="form-control", name="vage" disabled>
+						</div>
+				
+						<div class="form-group col-md-4">
+							<label for="vwages">wages</label>
+							<input type="text" class="form-control", name="vwages" disabled>
+						</div>
+						
+						<div class="form-group col-md-3">
+							<label for="vrating">Rating</label>
+							<input type="number" class="form-control", name="vrating" disabled>
+						</div>
+			
+						<div class="form-group col-md-5">
+							<label for="vprice">Market Value</label>
+							<input type="number" class="form-control", name="vprice" disabled>
+						</div>
+			
+						<div class="form-group col-md-5">
+							<label for="vcontract_till">Contract Expire</label>
+							<input type="date" class="form-control" pattern="\d{4}/\d{2}/\d{2}" name="vcontract_till" disabled>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		</div>
+	</div>
+
+
+</body>
+</html>

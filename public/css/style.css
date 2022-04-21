@@ -1,0 +1,45 @@
+body {
+    background: #0d1521;
+    background-image: url("../img/camp-nou.jpg");
+    font-family: tahoma;
+    color: #989898;
+}
+
+.container {
+    align-self: center;
+}
+
+#add-form{
+    /* border: 1px solid #34eac1; */
+    border-left: 0.6rem solid #485460;
+    padding: 0.6rem;
+    margin-left: 0.5rem;
+    background-color: #0d1521;
+    border-radius: .4rem;
+}
+#show-table{
+    background-color: #30336b;
+    /* border-left: 0.6rem solid #30336b; */
+    color: snow;
+    padding: 0;
+    margin-left: .6rem;
+    border-radius: .4rem;
+}
+#show-table th{
+    color: skyblue;
+    background-color: #00695C;
+}
+
+.add-btn{
+    width: 90%;
+    margin-left: 3%;
+    background-color: #0097e6;
+    border: none ;
+    font-size: 1.2em;
+}
+.add-btn:hover{
+    background-color: #8c7ae6;
+}
+#show-table td{
+ width: 100%;
+}
