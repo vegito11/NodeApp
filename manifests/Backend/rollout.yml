@@ -1,0 +1,51 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: realtimeapp
+  labels:
+    app: sample-node-app
+spec:
+  selector:
+    matchLabels:
+      app: sample-node-app
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: sample-node-app
+    spec:
+      containers:
+      - image: 228722872020/sample-node-app:2.0
+        name: sample-node-app
+        ports:
+        - containerPort: 3000
+        env:
+          - name: MONGO_SERVER_URL
+            value: "mongodb-service"
+          - name: MONGO_PORT
+            value: "27017"
+  
+  strategy:
+    canary:
+      steps:
+      - setWeight: 50
+      - pause:
+          duration: "30s"
+      - setWeight: 80
+      - pause:
+          duration: "30s"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: realtimeapp-stable-service
+  labels:
+    app: sample-node-app
+spec:
+  ports:
+  - port: 3000
+    targetPort: 3000
+    nodePort: 30000
+  selector:
+    app: sample-node-app
+  type: NodePort
